@@ -1,0 +1,1130 @@
+# UltraType — Complete `matches.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UltraType</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080b16;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    height: 70px;
+    background: #111629;
+    border-bottom: 1px solid #28304b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: #7c5cff;
+}
+
+.logo span {
+    color: white;
+}
+
+nav a {
+    color: #aab3cc;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.container {
+    width: 900px;
+    max-width: 94%;
+    margin: 40px auto;
+}
+
+.card {
+    background: #111629;
+    border: 1px solid #29324f;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    background: #080b16;
+    border: 1px solid #303957;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    margin: 8px 0 15px;
+}
+
+input:focus {
+    border-color: #7c5cff;
+}
+
+button {
+    border: 0;
+    border-radius: 8px;
+    padding: 13px 20px;
+    background: #7c5cff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #9278ff;
+}
+
+button.secondary {
+    background: #222a43;
+}
+
+button.danger {
+    background: #b83b50;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.user-result {
+    background: #0b0f1e;
+    border: 1px solid #29324f;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.owner {
+    color: #ffca3a;
+    font-weight: bold;
+}
+
+.bot {
+    color: #62e6a7;
+    font-weight: bold;
+}
+
+.match-player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0b0f1e;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 10px 0;
+}
+
+.vs {
+    color: #7c5cff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.big-name {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.wpm {
+    color: #9c88ff;
+    margin-top: 5px;
+}
+
+#textDisplay {
+    background: #080b16;
+    border: 1px solid #303957;
+    border-radius: 10px;
+    padding: 25px;
+    font-size: 22px;
+    line-height: 1.7;
+    margin: 20px 0;
+}
+
+#typingInput {
+    font-size: 20px;
+}
+
+.correct {
+    color: #62e6a7;
+}
+
+.incorrect {
+    color: #ff5964;
+    text-decoration: underline;
+}
+
+.current {
+    border-bottom: 2px solid #7c5cff;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat {
+    flex: 1;
+    background: #0b0f1e;
+    border: 1px solid #29324f;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 24px;
+    color: #7c5cff;
+}
+
+#result {
+    text-align: center;
+    padding: 25px;
+    background: #171d33;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+#result h2 {
+    margin-top: 0;
+}
+
+.success {
+    color: #62e6a7;
+}
+
+.failure {
+    color: #ff5964;
+}
+
+.notice {
+    color: #aab3cc;
+    margin: 10px 0;
+}
+
+.small {
+    color: #747f9d;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Ultra<span>Type</span></div>
+
+    <div>
+        <a href="#" onclick="showHome()">Home</a>
+        <a href="#" onclick="showMatches()">Matches</a>
+        <a href="#" onclick="showUsers()">Users</a>
+        <a href="#" onclick="showSignup()">Sign Up</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- HOME -->
+
+    <div id="homePage" class="card">
+        <h1>Welcome to UltraType</h1>
+
+        <p class="notice">
+            Race players, improve your typing speed, and climb the leaderboard.
+        </p>
+
+        <button onclick="showMatches()">
+            Find a Match
+        </button>
+
+        <button class="secondary" onclick="showSignup()">
+            Create Account
+        </button>
+
+        <div class="small">
+            Every 7th match has a special opponent: Cookie Bot.
+        </div>
+    </div>
+
+
+    <!-- SIGN UP -->
+
+    <div id="signupPage" class="card hidden">
+
+        <h1>Create Your Account</h1>
+
+        <label>Username</label>
+
+        <input
+            id="signupUsername"
+            type="text"
+            maxlength="20"
+            placeholder="Username"
+        >
+
+        <label>Password</label>
+
+        <input
+            id="signupPassword"
+            type="password"
+            placeholder="Password"
+        >
+
+        <button onclick="signup()">
+            Create Account
+        </button>
+
+        <p id="signupMessage"></p>
+
+    </div>
+
+
+    <!-- USERS -->
+
+    <div id="usersPage" class="card hidden">
+
+        <h1>Search Users</h1>
+
+        <input
+            id="userSearch"
+            type="text"
+            placeholder="Search for a username..."
+            oninput="searchUsers()"
+        >
+
+        <div id="userResults"></div>
+
+    </div>
+
+
+    <!-- MATCHES -->
+
+    <div id="matchesPage" class="card hidden">
+
+        <h1>Find a Match</h1>
+
+        <p class="notice">
+            Match #<span id="matchNumber">1</span>
+        </p>
+
+        <div id="opponentBox"></div>
+
+        <button onclick="startMatch()">
+            Start Match
+        </button>
+
+    </div>
+
+
+    <!-- RACE -->
+
+    <div id="racePage" class="card hidden">
+
+        <h1>Race</h1>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong id="wpm">0</strong>
+                WPM
+            </div>
+
+            <div class="stat">
+                <strong id="accuracy">100%</strong>
+                Accuracy
+            </div>
+
+            <div class="stat">
+                <strong id="timer">0</strong>
+                Seconds
+            </div>
+
+        </div>
+
+        <div id="textDisplay"></div>
+
+        <input
+            id="typingInput"
+            type="text"
+            autocomplete="off"
+            placeholder="Start typing here..."
+            oninput="checkTyping()"
+        >
+
+        <div id="result" class="hidden"></div>
+
+        <button
+            id="nextButton"
+            class="hidden"
+            onclick="showMatches()"
+        >
+            Next Match
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+====================================================
+ULTRATYPE DATA
+====================================================
+*/
+
+const texts = [
+    "The fastest typists are not always the ones who type the hardest.",
+    "Practice every day and your typing speed will continue to improve.",
+    "Welcome to UltraType where players compete for the fastest time.",
+    "Speed and accuracy are both important when you enter a race.",
+    "Keep practicing and you might become the fastest player online.",
+    "Every great typist started by learning one key at a time."
+];
+
+let users = JSON.parse(
+    localStorage.getItem("ultratype_users") || "[]"
+);
+
+let matchCount = Number(
+    localStorage.getItem("ultratype_match_count") || "0"
+);
+
+let currentOpponent = null;
+let currentText = "";
+let startTime = null;
+let timerInterval = null;
+let finished = false;
+
+
+/*
+====================================================
+DEFAULT OWNER
+====================================================
+*/
+
+function createOwner() {
+
+    const exists = users.some(
+        user =>
+            user.username.toLowerCase() === "theowner67"
+    );
+
+    if (!exists) {
+
+        users.push({
+            username: "theowner67",
+            password: "owner",
+            role: "owner",
+            races: 0,
+            wins: 0,
+            losses: 0
+        });
+
+        saveUsers();
+    }
+}
+
+createOwner();
+
+
+/*
+====================================================
+SAVE USERS
+====================================================
+*/
+
+function saveUsers() {
+
+    localStorage.setItem(
+        "ultratype_users",
+        JSON.stringify(users)
+    );
+}
+
+
+/*
+====================================================
+PAGE SWITCHING
+====================================================
+*/
+
+function hidePages() {
+
+    document.getElementById("homePage")
+        .classList.add("hidden");
+
+    document.getElementById("signupPage")
+        .classList.add("hidden");
+
+    document.getElementById("usersPage")
+        .classList.add("hidden");
+
+    document.getElementById("matchesPage")
+        .classList.add("hidden");
+
+    document.getElementById("racePage")
+        .classList.add("hidden");
+}
+
+function showHome() {
+
+    hidePages();
+
+    document.getElementById("homePage")
+        .classList.remove("hidden");
+}
+
+function showSignup() {
+
+    hidePages();
+
+    document.getElementById("signupPage")
+        .classList.remove("hidden");
+}
+
+function showUsers() {
+
+    hidePages();
+
+    document.getElementById("usersPage")
+        .classList.remove("hidden");
+
+    searchUsers();
+}
+
+function showMatches() {
+
+    hidePages();
+
+    document.getElementById("matchesPage")
+        .classList.remove("hidden");
+
+    prepareMatch();
+}
+
+
+/*
+====================================================
+SIGN UP
+====================================================
+*/
+
+function signup() {
+
+    const username =
+        document.getElementById("signupUsername")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("signupPassword")
+        .value;
+
+    const message =
+        document.getElementById("signupMessage");
+
+    if (username.length < 3) {
+
+        message.style.color = "#ff5964";
+
+        message.textContent =
+            "Username must be at least 3 characters.";
+
+        return;
+    }
+
+    if (password.length < 4) {
+
+        message.style.color = "#ff5964";
+
+        message.textContent =
+            "Password must be at least 4 characters.";
+
+        return;
+    }
+
+    const exists = users.some(
+        user =>
+            user.username.toLowerCase() ===
+            username.toLowerCase()
+    );
+
+    if (exists) {
+
+        message.style.color = "#ff5964";
+
+        message.textContent =
+            "That username already exists.";
+
+        return;
+    }
+
+    users.push({
+
+        username: username,
+
+        password: password,
+
+        role: "player",
+
+        races: 0,
+
+        wins: 0,
+
+        losses: 0
+
+    });
+
+    saveUsers();
+
+    message.style.color = "#62e6a7";
+
+    message.textContent =
+        "Account created successfully!";
+
+    document.getElementById("signupUsername")
+        .value = "";
+
+    document.getElementById("signupPassword")
+        .value = "";
+
+}
+
+
+/*
+====================================================
+USER SEARCH
+====================================================
+*/
+
+function searchUsers() {
+
+    const query =
+        document.getElementById("userSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const results =
+        document.getElementById("userResults");
+
+    results.innerHTML = "";
+
+    const filtered = users.filter(
+        user =>
+            user.username
+            .toLowerCase()
+            .includes(query)
+    );
+
+    if (filtered.length === 0) {
+
+        results.innerHTML =
+            "<p class='notice'>No users found.</p>";
+
+        return;
+    }
+
+    filtered.forEach(user => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "user-result";
+
+        let role = "Player";
+
+        if (user.role === "owner") {
+            role = "OWNER";
+        }
+
+        div.innerHTML = `
+
+            <div>
+                <div class="big-name">
+                    ${escapeHTML(user.username)}
+                </div>
+
+                <div class="${user.role === "owner" ? "owner" : ""}">
+                    ${role}
+                </div>
+            </div>
+
+            <div class="small">
+                ${user.wins || 0} wins
+            </div>
+
+        `;
+
+        results.appendChild(div);
+
+    });
+}
+
+
+/*
+====================================================
+SECURITY FOR USERNAME DISPLAY
+====================================================
+*/
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+/*
+====================================================
+MATCH SYSTEM
+====================================================
+*/
+
+function prepareMatch() {
+
+    document.getElementById("matchNumber")
+        .textContent = matchCount + 1;
+
+    /*
+       Every 7th match is Cookie Bot.
+    */
+
+    if ((matchCount + 1) % 7 === 0) {
+
+        currentOpponent = {
+
+            username: "Cookie Bot",
+
+            wpm:
+                Math.floor(
+                    Math.random() * 31
+                ) + 95,
+
+            bot: true
+
+        };
+
+    } else {
+
+        const botNames = [
+            "SpeedType",
+            "KeyboardKing",
+            "TurboTyper",
+            "UltraRacer",
+            "FastFingers",
+            "TypeMaster"
+        ];
+
+        currentOpponent = {
+
+            username:
+                botNames[
+                    Math.floor(
+                        Math.random() *
+                        botNames.length
+                    )
+                ],
+
+            wpm:
+                Math.floor(
+                    Math.random() * 51
+                ) + 60,
+
+            bot: false
+
+        };
+
+    }
+
+    document.getElementById("opponentBox")
+        .innerHTML = `
+
+        <div class="match-player">
+
+            <div>
+                <div class="big-name">
+                    You
+                </div>
+
+                <div class="wpm">
+                    Ready
+                </div>
+            </div>
+
+            <div class="vs">
+                VS
+            </div>
+
+            <div>
+                <div class="big-name ${
+                    currentOpponent.bot
+                        ? "bot"
+                        : ""
+                }">
+                    ${currentOpponent.username}
+                </div>
+
+                <div class="wpm">
+                    ${currentOpponent.wpm} WPM
+                </div>
+            </div>
+
+        </div>
+
+        `;
+
+}
+
+
+/*
+====================================================
+START MATCH
+====================================================
+*/
+
+function startMatch() {
+
+    matchCount++;
+
+    localStorage.setItem(
+        "ultratype_match_count",
+        matchCount
+    );
+
+    currentText =
+        texts[
+            Math.floor(
+                Math.random() *
+                texts.length
+            )
+        ];
+
+    finished = false;
+
+    hidePages();
+
+    document.getElementById("racePage")
+        .classList.remove("hidden");
+
+    document.getElementById("typingInput")
+        .value = "";
+
+    document.getElementById("result")
+        .classList.add("hidden");
+
+    document.getElementById("nextButton")
+        .classList.add("hidden");
+
+    renderText();
+
+    document.getElementById("typingInput")
+        .focus();
+
+    startTime = Date.now();
+
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(updateTimer, 100);
+
+}
+
+
+/*
+====================================================
+RENDER TEXT
+====================================================
+*/
+
+function renderText() {
+
+    const input =
+        document.getElementById("typingInput")
+        .value;
+
+    let html = "";
+
+    for (
+        let i = 0;
+        i < currentText.length;
+        i++
+    ) {
+
+        if (i < input.length) {
+
+            if (
+                input[i] ===
+                currentText[i]
+            ) {
+
+                html +=
+                    `<span class="correct">
+                        ${escapeHTML(currentText[i])}
+                    </span>`;
+
+            } else {
+
+                html +=
+                    `<span class="incorrect">
+                        ${escapeHTML(currentText[i])}
+                    </span>`;
+
+            }
+
+        } else if (i === input.length) {
+
+            html +=
+                `<span class="current">
+                    ${escapeHTML(currentText[i])}
+                </span>`;
+
+        } else {
+
+            html +=
+                escapeHTML(currentText[i]);
+
+        }
+
+    }
+
+    document.getElementById("textDisplay")
+        .innerHTML = html;
+
+}
+
+
+/*
+====================================================
+TYPING
+====================================================
+*/
+
+function checkTyping() {
+
+    if (finished) return;
+
+    const input =
+        document.getElementById("typingInput")
+        .value;
+
+    renderText();
+
+    let correct = 0;
+
+    for (
+        let i = 0;
+        i < input.length;
+        i++
+    ) {
+
+        if (
+            input[i] ===
+            currentText[i]
+        ) {
+
+            correct++;
+
+        }
+
+    }
+
+    const accuracy =
+        input.length === 0
+            ? 100
+            : Math.round(
+                correct /
+                input.length *
+                100
+            );
+
+    document.getElementById("accuracy")
+        .textContent =
+        accuracy + "%";
+
+    if (input === currentText) {
+
+        finishRace();
+    }
+
+}
+
+
+/*
+====================================================
+TIMER + WPM
+====================================================
+*/
+
+function updateTimer() {
+
+    if (!startTime) return;
+
+    const seconds =
+        (Date.now() - startTime) /
+        1000;
+
+    document.getElementById("timer")
+        .textContent =
+        seconds.toFixed(1);
+
+    const input =
+        document.getElementById("typingInput")
+        .value;
+
+    const words =
+        input.length / 5;
+
+    const wpm =
+        seconds > 0
+            ? Math.round(
+                words /
+                (seconds / 60)
+            )
+            : 0;
+
+    document.getElementById("wpm")
+        .textContent = wpm;
+
+}
+
+
+/*
+====================================================
+FINISH RACE
+====================================================
+*/
+
+function finishRace() {
+
+    if (finished) return;
+
+    finished = true;
+
+    clearInterval(timerInterval);
+
+    const seconds =
+        (Date.now() - startTime) /
+        1000;
+
+    const wpm =
+        Math.round(
+            (currentText.length / 5) /
+            (seconds / 60)
+        );
+
+    let player;
+
+    /*
+      Find the owner or first user.
+      This keeps the demo working without login.
+    */
+
+    player =
+        users.find(
+            user =>
+                user.username ===
+                "theowner67"
+        );
+
+    if (!player) {
+
+        player = {
+            username: "Guest",
+            wins: 0,
+            losses: 0,
+            races: 0
+        };
+
+    }
+
+    player.races =
+        (player.races || 0) + 1;
+
+    const won =
+        wpm >= currentOpponent.wpm;
+
+    if (won) {
+
+        player.wins =
+            (player.wins || 0) + 1;
+
+    } else {
+
+        player.losses =
+            (player.losses || 0) + 1;
+
+    }
+
+    saveUsers();
+
+    const result =
+        document.getElementById("result");
+
+    result.classList.remove("hidden");
+
+    result.innerHTML = `
+
+        <h2 class="${won ? "success" : "failure"}">
+
+            ${won ? "YOU WON!" : "YOU LOST!"}
+
+        </h2>
+
+        <p>
+            Your speed:
+            <strong>${wpm} WPM</strong>
+        </p>
+
+        <p>
+            ${currentOpponent.username}:
+            <strong>${currentOpponent.wpm} WPM</strong>
+        </p>
+
+        <p class="notice">
+            Match #${matchCount}
+        </p>
+
+    `;
+
+    document.getElementById("nextButton")
+        .classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+</html>
+```
