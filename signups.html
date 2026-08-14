@@ -1,0 +1,604 @@
+# UltraType — `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UltraType — Race. Type. Win.</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #0b1020;
+      color: white;
+      min-height: 100vh;
+    }
+
+    /* NAVBAR */
+    nav {
+      height: 72px;
+      background: #11182d;
+      border-bottom: 1px solid #26304d;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #7c5cff;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #b9c2dc;
+      text-decoration: none;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .login {
+      padding: 10px 18px;
+      border: 1px solid #7c5cff;
+      border-radius: 8px;
+      color: #fff !important;
+    }
+
+    .signup {
+      background: #7c5cff;
+      padding: 11px 19px;
+      border-radius: 8px;
+      color: white !important;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 100px 7% 80px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 20%, #272052 0%, transparent 45%),
+        #0b1020;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #191535;
+      color: #9f8cff;
+      border: 1px solid #493d88;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 86px);
+      line-height: .95;
+      font-weight: 950;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #7c5cff;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #9ba6c4;
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 15px 28px;
+      border-radius: 10px;
+      transition: .2s;
+    }
+
+    .primary-btn {
+      background: #7c5cff;
+      color: white;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      background: #8d72ff;
+    }
+
+    .secondary-btn {
+      background: #171f38;
+      color: white;
+      border: 1px solid #303b5e;
+    }
+
+    .secondary-btn:hover {
+      background: #202a49;
+    }
+
+    /* STATS */
+    .stats {
+      max-width: 1000px;
+      margin: 20px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 0 7%;
+    }
+
+    .stat {
+      background: #11182d;
+      border: 1px solid #252f4c;
+      border-radius: 14px;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .stat h2 {
+      font-size: 30px;
+      color: #7c5cff;
+    }
+
+    .stat p {
+      color: #8995b5;
+      margin-top: 5px;
+    }
+
+    /* FEATURES */
+    .section {
+      padding: 85px 7%;
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #8995b5;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: #11182d;
+      border: 1px solid #252f4c;
+      border-radius: 16px;
+      padding: 30px;
+      transition: .2s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: #6250bd;
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: #211b45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      margin-bottom: 20px;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .feature p {
+      color: #8995b5;
+      line-height: 1.6;
+    }
+
+    /* RACE PREVIEW */
+    .race {
+      background: #10172b;
+      border-top: 1px solid #202a45;
+      border-bottom: 1px solid #202a45;
+    }
+
+    .race-box {
+      max-width: 1000px;
+      margin: auto;
+      background: #11182d;
+      border: 1px solid #293453;
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .race-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .race-header h3 {
+      font-size: 23px;
+    }
+
+    .live {
+      color: #62e6a7;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .player {
+      margin: 18px 0;
+    }
+
+    .player-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #bac3da;
+    }
+
+    .bar {
+      height: 12px;
+      background: #202a44;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      border-radius: 20px;
+      background: #7c5cff;
+    }
+
+    .p1 { width: 88%; }
+    .p2 { width: 73%; }
+    .p3 { width: 61%; }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 100px 7%;
+    }
+
+    .cta h2 {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #8995b5;
+      margin-bottom: 30px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #080d19;
+      border-top: 1px solid #202a42;
+      padding: 35px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #66718d;
+    }
+
+    footer strong {
+      color: #7c5cff;
+    }
+
+    footer a {
+      color: #66718d;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .nav-links a:not(.signup):not(.login) {
+        display: none;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">Ultra<span>Type</span></div>
+
+    <div class="nav-links">
+      <a href="#races">Races</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#features">Features</a>
+      <a href="#" class="login">Log In</a>
+      <a href="#" class="signup">Sign Up</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">⚡ THE NEXT GENERATION OF TYPING</div>
+
+    <h1>
+      Type Fast.<br>
+      Race <span>Faster.</span>
+    </h1>
+
+    <p>
+      Welcome to UltraType — a competitive typing game where
+      speed, accuracy and skill put you ahead of everyone else.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="primary-btn" onclick="startRace()">
+        Start Racing
+      </button>
+
+      <button class="secondary-btn" onclick="showInfo()">
+        How It Works
+      </button>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat">
+      <h2 id="racers">12,482</h2>
+      <p>Players Online</p>
+    </div>
+
+    <div class="stat">
+      <h2>4.8M+</h2>
+      <p>Races Completed</p>
+    </div>
+
+    <div class="stat">
+      <h2>215 WPM</h2>
+      <p>Top Speed</p>
+    </div>
+  </div>
+
+  <section class="section" id="features">
+
+    <div class="section-title">
+      <h2>Everything You Need</h2>
+      <p>UltraType is built for competitive typists.</p>
+    </div>
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">🏁</div>
+        <h3>Live Races</h3>
+        <p>
+          Race against other players in real-time typing competitions
+          and prove who's the fastest.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🏆</div>
+        <h3>Leaderboards</h3>
+        <p>
+          Climb the rankings, earn records and become one of the
+          fastest typists on UltraType.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">⚙️</div>
+        <h3>Customize</h3>
+        <p>
+          Customize your profile, racing setup and experience
+          as you build your UltraType identity.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔥</div>
+        <h3>Streaks</h3>
+        <p>
+          Keep your streak alive by racing every day and improving
+          your typing performance.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📈</div>
+        <h3>Stats</h3>
+        <p>
+          Track your WPM, accuracy, races, wins and personal records.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">👥</div>
+        <h3>Teams</h3>
+        <p>
+          Create or join a team and compete against other groups
+          for the top spot.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="race" id="races">
+
+    <div class="section">
+
+      <div class="section-title">
+        <h2>Live Race</h2>
+        <p>See what an UltraType race looks like.</p>
+      </div>
+
+      <div class="race-box">
+
+        <div class="race-header">
+          <h3>Race #48291</h3>
+          <div class="live">● LIVE</div>
+        </div>
+
+        <div class="player">
+          <div class="player-info">
+            <span>UltraRacer</span>
+            <span>112 WPM</span>
+          </div>
+
+          <div class="bar">
+            <div class="progress p1"></div>
+          </div>
+        </div>
+
+        <div class="player">
+          <div class="player-info">
+            <span>SpeedType</span>
+            <span>97 WPM</span>
+          </div>
+
+          <div class="bar">
+            <div class="progress p2"></div>
+          </div>
+        </div>
+
+        <div class="player">
+          <div class="player-info">
+            <span>KeyboardKing</span>
+            <span>84 WPM</span>
+          </div>
+
+          <div class="bar">
+            <div class="progress p3"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="leaderboard">
+
+    <h2>Ready to Race?</h2>
+
+    <p>
+      Create your UltraType account and start climbing the leaderboard.
+    </p>
+
+    <button class="primary-btn" onclick="startRace()">
+      Create Your Racer
+    </button>
+
+  </section>
+
+  <footer>
+    <div>
+      © 2026 <strong>UltraType</strong>
+    </div>
+
+    <div>
+      <a href="#">About</a>
+      <a href="#">Rules</a>
+      <a href="#">Privacy</a>
+      <a href="#">Discord</a>
+    </div>
+  </footer>
+
+  <script>
+    function startRace() {
+      alert("Race lobby coming soon!");
+    }
+
+    function showInfo() {
+      alert(
+        "UltraType is a competitive typing game. " +
+        "Type as quickly and accurately as possible to beat your opponents!"
+      );
+    }
+
+    // Small live-player animation
+    setInterval(() => {
+      const element = document.getElementById("racers");
+      const current = parseInt(element.textContent.replace(",", ""));
+      const change = Math.floor(Math.random() * 7) - 3;
+
+      element.textContent =
+        Math.max(12000, current + change).toLocaleString();
+    }, 3000);
+  </script>
+
+</body>
+</html>
+```
